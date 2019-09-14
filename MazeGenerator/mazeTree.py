@@ -44,12 +44,16 @@ class MazeTree():
             return vertexID + 1
             
     def initConnections(self, size):
+        # Loop through each vertex in the maze
         for vertexID in range(size*size):
+            # Get the each adjacent vertex to current (if exists)
             left = self.getVertexLeft(size, vertexID)
             right = self.getVertexRight(size, vertexID)
             above = self.getVertexAbove(size, vertexID)
             below = self.getVertexBelow(size, vertexID)
             
+            # If an adjacent vertex exists, and connection between two doesn't
+                # already exist, create connection with random weight
             if left != -1 and not self.tree.connectionExist(vertexID, left):
                 self.tree.addWeightedConnection(vertexID, left, self.getNewWeight(size))
             if right != -1 and not self.tree.connectionExist(vertexID, right):
@@ -61,12 +65,12 @@ class MazeTree():
             
                 
     def getNewWeight(self, size):
-        maxWeight = ((size-1) * size * 2) - 1 # Number of connections
+        maxWeight = ((size-1) * size * 2) - 1 # Total number of connections
         
+        # Get a unique weight
         weight = random.randint(0, maxWeight)
         while weight in self.usedWeights:
             weight = random.randint(0, maxWeight)
             
         self.usedWeights.append(weight)
-            
         return weight

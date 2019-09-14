@@ -1,5 +1,10 @@
 from mazeTree import MazeTree
+from drawMaze import DrawMaze
 
-generator = MazeTree(5)
+size = 10
+
+generator = MazeTree(size)
 generator.tree.displayTree()
+
+draw = DrawMaze(size)
 
