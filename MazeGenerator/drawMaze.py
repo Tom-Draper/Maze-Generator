@@ -53,7 +53,8 @@ class DrawMaze():
     def removeEdge(self, X1, Y1, X2, Y2):
         self.pen = turtle.Turtle()
         self.pen.color("white")
-        self.pen.pensize(3.1)
+        self.pen.pensize(3)
+        self.pen.hideturtle()
         
         self.pen.up()
         self.pen.goto(X1, Y1)
@@ -61,7 +62,6 @@ class DrawMaze():
         self.pen.goto(X2, Y2)
         
         turtle.update()
-        turtle.done()
         
     def createExit(self, vertex, size, edge):
         # Get location vertex by length along edge either right or down 
@@ -70,25 +70,87 @@ class DrawMaze():
             location = vertex
             X1 = self.startX + location * self.cellLength
             X2 = X1 + self.cellLength
-            y = self.startY
-            self.removeEdge(X1, y, X2, y)
+            Y1 = Y2 = self.startY
         elif edge == 'b':
             location = vertex - (size*(size-1))
             X1 = self.startX + (location * self.cellLength)
             X2 = X1 + self.cellLength
-            y = self.startY - (self.cellLength * size)
-            self.removeEdge(X1, y, X2, y)
+            Y1 = Y2 = self.startY - (self.cellLength * size)
         elif edge == 'l':
             location = vertex / size
-            x = self.startX
+            X1 = X2 = self.startX
             Y1 = self.startY - (location * self.cellLength)
             Y2 = Y1 - self.cellLength
-            self.removeEdge(x, Y1, x, Y2)
         elif edge == 'r':
             location = (vertex - (size - 1)) / size + 1
-            x = self.startX + (self.cellLength * size)
+            X1 = X2 = self.startX + (self.cellLength * size)
             Y1 = self.startY - (location * self.cellLength)
             Y2 = Y1 + self.cellLength
-            self.removeEdge(x, Y1, x, Y2)
-        
             
+        self.removeEdge(X1, Y1, X2, Y2)
+            
+    def getTopLeftCornerXCoords(self, vertexID, size):
+        return self.startX + (self.cellLength * ((vertexID + size) % size))
+        
+    def getTopLeftCornerYCoords(self, vertexID, size):
+        return self.startY - (self.cellLength * (vertexID//size))
+            
+    def mergeCells(self, nextVertex, mergeVertex, size):
+        # Get coordinates of top left corner of vertex cell
+        nextVertexXCoord = self.getTopLeftCornerXCoords(nextVertex, size)
+        nextVertexYCoord = self.getTopLeftCornerYCoords(nextVertex, size)
+        mergeVertexXCoord = self.getTopLeftCornerXCoords(mergeVertex, size)
+        mergeVertexYCoord = self.getTopLeftCornerYCoords(mergeVertex, size)
+        
+        '''
+        self.pen.up()
+        self.pen.goto(nextVertexXCoord, nextVertexYCoord)
+        self.pen.color("green")
+        self.pen.down()
+        self.pen.goto(mergeVertexXCoord, mergeVertexYCoord)
+        
+        turtle.update()
+        '''
+        
+        # Get edge the of nextVertex cell that mergeVertex is adjacent.
+        # mergeVertex above nextVertex
+        if nextVertex == mergeVertex + size:
+            # Top left corner of nextVertex
+            X1 = nextVertexXCoord
+            Y1 = nextVertexYCoord
+            # Bottom right corner of mergeVertex
+            X2 = mergeVertexXCoord + self.cellLength
+            Y2 = mergeVertexYCoord - self.cellLength
+            self.removeEdge(X1, Y1, X2, Y2)
+        # mergeVertex below nextVertex
+        elif nextVertex + size == mergeVertex:
+            # Bottom left corner of nextVertex
+            X1 = nextVertexXCoord
+            Y1 = nextVertexYCoord - self.cellLength
+            # Top right corner of mergeVertex
+            X2 = mergeVertexXCoord + self.cellLength
+            Y2 = mergeVertexYCoord
+            self.removeEdge(X1, Y1, X2, Y2)
+        # mergeVertex to left of nextVertex
+        elif nextVertex == mergeVertex + 1:
+            # Top left corner of nextVertex
+            X1 = nextVertexXCoord
+            Y1 = nextVertexYCoord
+            # Bottom left corner of mergeVertex
+            X2 = mergeVertexXCoord + self.cellLength
+            Y2 = mergeVertexYCoord - self.cellLength
+            self.removeEdge(X1, Y1, X2, Y2)
+        # mergeVertex to right of nextVertex
+        elif nextVertex + 1 == mergeVertex:
+            # Top left corner of nextVertex
+            X1 = nextVertexXCoord + self.cellLength
+            Y1 = nextVertexYCoord
+            # Bottom left corner of mergeVertex
+            X2 = mergeVertexXCoord
+            Y2 = mergeVertexYCoord - self.cellLength
+            self.removeEdge(X1, Y1, X2, Y2)
+            
+        print('Removed edge between ' + str(nextVertex) + ' and ' + str(mergeVertex)) 
+    
+    def finish(self):
+        turtle.done()

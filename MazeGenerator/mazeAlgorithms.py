@@ -17,7 +17,33 @@ class MazeAlgorithms():
         leftVertices = [x * size for x in range(size)]
         rightVertices = [(x + 1) * size - 1 for x in range(size)]
         
-        if vertex in topVertices:
+        # If in the corners, randomly choose between two edges
+        if vertex in topVertices and vertex in leftVertices:
+            choice = random.randint(0, 2)
+            if choice == 0:
+                return 't'
+            else:
+                return 'l'
+        elif vertex in topVertices and vertex in rightVertices:
+            choice = random.randint(0, 2)
+            if choice == 0:
+                return 't'
+            else:
+                return 'r'
+        elif vertex in bottomVertices and vertex in leftVertices:
+            choice = random.randint(0, 2)
+            if choice == 0:
+                return 'b'
+            else:
+                return 'l'
+        elif vertex in bottomVertices and vertex in rightVertices:
+            choice = random.randint(0, 2)
+            if choice == 0:
+                return 'b'
+            else:
+                return 'r'
+        # Get edge vertex is on
+        elif vertex in topVertices:
             return 't'
         elif vertex in bottomVertices:
             return 'b'
@@ -34,14 +60,14 @@ class MazeAlgorithms():
         
         starterVertices = self.getOuterVetices(size)
         # Choice first vertex from outer edge vertices
-        firstVertex = random.choice(starterVertices) 
+        nextVertex = random.choice(starterVertices) 
         
-        visited.append(firstVertex)
+        visited.append(nextVertex)
         # Store adjacent vertices to first visited
-        frontiers.append(mazeTree.tree.getConnections(firstVertex))
+        frontiers += mazeTree.tree.getConnections(nextVertex)
         
         # Draw the exit next to the first vertex
-        draw.createExit(firstVertex, size, self.getVertexEdge(firstVertex, size))
+        draw.createExit(nextVertex, size, self.getVertexEdge(nextVertex, size))
         
         # Loop until all frontiers visited
         while frontiers:
@@ -53,13 +79,18 @@ class MazeAlgorithms():
             mergeWith = []
             for vertex in adjacent:
                 if vertex in visited:
-                    adjacent.remove(vertex)
-                    mergeWith.add(vertex)
+                    # Potential vertex to merge with
+                    mergeWith.append(vertex) 
+                elif vertex not in frontiers:
+                    # Add all new adjacent vertices to frontiers
+                    frontiers.append(vertex) 
                     
-            # Select vertex to merge with
+            # Select vertex to merge with nextVertex
             mergeVertex = random.choice(mergeWith)
-                    
-            visited.append(nextVertex)
-            frontiers.append(adjacent)
             
-            draw.removeEdge()
+            visited.append(nextVertex)
+            frontiers.remove(nextVertex)
+            
+            draw.mergeCells(nextVertex, mergeVertex, size)
+            
+            

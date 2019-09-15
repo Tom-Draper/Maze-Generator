@@ -72,7 +72,10 @@ class Tree():
             return True
         
     def getConnections(self, vertexID):
-        return list(self.vertices[vertexID].keys())
+        
+        connections = (tuple(self.vertices[vertexID].keys()))
+    
+        return list(connections)
             
     def displayTree(self):
         # Check if dictionary empty
