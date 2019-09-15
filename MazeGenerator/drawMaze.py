@@ -9,6 +9,8 @@ class DrawMaze():
         self.wn_width = 1000
         self.wn_height = 1000
         
+        self.pensize = 3
+        
         self.startX = -((self.wn_width-100)/2)
         self.startY = (self.wn_height-100)/2
         
@@ -27,7 +29,7 @@ class DrawMaze():
         self.pen.color("black")
         self.pen.hideturtle()
         self.pen.speed(0)
-        self.pen.pensize(3)
+        self.pen.pensize(self.pensize)
         turtle.tracer(False)
         
         # Draw horizontal lines
@@ -68,24 +70,24 @@ class DrawMaze():
             # (depending on edge)
         if edge == 't':
             location = vertex
-            X1 = self.startX + location * self.cellLength
-            X2 = X1 + self.cellLength
+            X1 = self.startX + location * self.cellLength + self.pensize
+            X2 = X1 + self.cellLength - self.pensize
             Y1 = Y2 = self.startY
         elif edge == 'b':
             location = vertex - (size*(size-1))
-            X1 = self.startX + (location * self.cellLength)
-            X2 = X1 + self.cellLength
+            X1 = self.startX + (location * self.cellLength) + self.pensize
+            X2 = X1 + self.cellLength - self.pensize
             Y1 = Y2 = self.startY - (self.cellLength * size)
         elif edge == 'l':
             location = vertex / size
             X1 = X2 = self.startX
-            Y1 = self.startY - (location * self.cellLength)
-            Y2 = Y1 - self.cellLength
+            Y1 = self.startY - (location * self.cellLength) - self.pensize
+            Y2 = Y1 - self.cellLength + self.pensize
         elif edge == 'r':
             location = (vertex - (size - 1)) / size + 1
             X1 = X2 = self.startX + (self.cellLength * size)
-            Y1 = self.startY - (location * self.cellLength)
-            Y2 = Y1 + self.cellLength
+            Y1 = self.startY - (location * self.cellLength) - self.pensize
+            Y2 = Y1 + self.cellLength + self.pensize
             
         self.removeEdge(X1, Y1, X2, Y2)
             
@@ -116,41 +118,42 @@ class DrawMaze():
         # mergeVertex above nextVertex
         if nextVertex == mergeVertex + size:
             # Top left corner of nextVertex
-            X1 = nextVertexXCoord
+            X1 = nextVertexXCoord + self.pensize
             Y1 = nextVertexYCoord
             # Bottom right corner of mergeVertex
-            X2 = mergeVertexXCoord + self.cellLength
+            X2 = mergeVertexXCoord + self.cellLength - self.pensize
             Y2 = mergeVertexYCoord - self.cellLength
             self.removeEdge(X1, Y1, X2, Y2)
         # mergeVertex below nextVertex
         elif nextVertex + size == mergeVertex:
             # Bottom left corner of nextVertex
-            X1 = nextVertexXCoord
+            X1 = nextVertexXCoord + self.pensize
             Y1 = nextVertexYCoord - self.cellLength
             # Top right corner of mergeVertex
-            X2 = mergeVertexXCoord + self.cellLength
+            X2 = mergeVertexXCoord + self.cellLength - self.pensize
             Y2 = mergeVertexYCoord
             self.removeEdge(X1, Y1, X2, Y2)
         # mergeVertex to left of nextVertex
         elif nextVertex == mergeVertex + 1:
             # Top left corner of nextVertex
             X1 = nextVertexXCoord
-            Y1 = nextVertexYCoord
-            # Bottom left corner of mergeVertex
+            Y1 = nextVertexYCoord - self.pensize
+            # Bottom right corner of mergeVertex
             X2 = mergeVertexXCoord + self.cellLength
-            Y2 = mergeVertexYCoord - self.cellLength
+            Y2 = mergeVertexYCoord - self.cellLength + self.pensize
             self.removeEdge(X1, Y1, X2, Y2)
         # mergeVertex to right of nextVertex
         elif nextVertex + 1 == mergeVertex:
-            # Top left corner of nextVertex
+            # Top right corner of nextVertex
             X1 = nextVertexXCoord + self.cellLength
-            Y1 = nextVertexYCoord
+            Y1 = nextVertexYCoord - self.pensize
             # Bottom left corner of mergeVertex
             X2 = mergeVertexXCoord
-            Y2 = mergeVertexYCoord - self.cellLength
+            Y2 = mergeVertexYCoord - self.cellLength + self.pensize
             self.removeEdge(X1, Y1, X2, Y2)
             
-        print('Removed edge between ' + str(nextVertex) + ' and ' + str(mergeVertex)) 
+        print('Removed edge between ' + str(nextVertex) + ' and ' + 
+              str(mergeVertex) + '.') 
     
     def finish(self):
         turtle.done()

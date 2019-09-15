@@ -2,7 +2,7 @@ from mazeTree import MazeTree
 from drawMaze import DrawMaze
 from mazeAlgorithms import MazeAlgorithms
 
-size = 5
+size = 10
 
 mazeTree = MazeTree(size)
 mazeTree.tree.displayTree()
