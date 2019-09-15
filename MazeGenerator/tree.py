@@ -70,6 +70,9 @@ class Tree():
         if (firstId in self.vertices.keys() and secondId in self.vertices.keys() and 
                 secondId in self.vertices[firstId]):
             return True
+        
+    def getConnections(self, vertexID):
+        return list(self.vertices[vertexID].keys())
             
     def displayTree(self):
         # Check if dictionary empty
