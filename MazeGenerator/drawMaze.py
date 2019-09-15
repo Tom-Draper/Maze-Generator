@@ -53,12 +53,7 @@ class DrawMaze():
     def removeEdge(self, X1, Y1, X2, Y2):
         self.pen = turtle.Turtle()
         self.pen.color("white")
-        
-        print('\n')
-        print(str(X1))
-        print(str(Y1))
-        print(str(X2))
-        print(str(Y2))
+        self.pen.pensize(3.1)
         
         self.pen.up()
         self.pen.goto(X1, Y1)
@@ -66,6 +61,7 @@ class DrawMaze():
         self.pen.goto(X2, Y2)
         
         turtle.update()
+        turtle.done()
         
     def createExit(self, vertex, size, edge):
         # Get location vertex by length along edge either right or down 
@@ -78,20 +74,20 @@ class DrawMaze():
             self.removeEdge(X1, y, X2, y)
         elif edge == 'b':
             location = vertex - (size*(size-1))
-            X1 = self.startX + location * self.cellLength
+            X1 = self.startX + (location * self.cellLength)
             X2 = X1 + self.cellLength
-            y = self.startY + (self.cellLength * (size + 1))
+            y = self.startY - (self.cellLength * size)
             self.removeEdge(X1, y, X2, y)
         elif edge == 'l':
             location = vertex / size
             x = self.startX
-            Y1 = self.startY + (location * self.cellLength)
-            Y2 = Y1 + self.cellLength
+            Y1 = self.startY - (location * self.cellLength)
+            Y2 = Y1 - self.cellLength
             self.removeEdge(x, Y1, x, Y2)
         elif edge == 'r':
-            location = (vertex - (size - 1)) / size
-            x = self.startX + (self.cellLength * (size + 1))
-            Y1 = self.startY + (location * self.cellLength)
+            location = (vertex - (size - 1)) / size + 1
+            x = self.startX + (self.cellLength * size)
+            Y1 = self.startY - (location * self.cellLength)
             Y2 = Y1 + self.cellLength
             self.removeEdge(x, Y1, x, Y2)
         

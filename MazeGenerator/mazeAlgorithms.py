@@ -2,7 +2,7 @@ import random
 
 class MazeAlgorithms():
     
-    def getOuterVetices(size):
+    def getOuterVetices(self, size):
         # Create lists of vertices at edge of maze
         topVertices = [x for x in range(size)]
         bottomVertices = [x for x in range(size*size - size, size*size)]
@@ -38,15 +38,16 @@ class MazeAlgorithms():
         
         visited.append(firstVertex)
         # Store adjacent vertices to first visited
-        frontiers.append(mazeTree.getConnections(firstVertex))
+        frontiers.append(mazeTree.tree.getConnections(firstVertex))
         
+        # Draw the exit next to the first vertex
         draw.createExit(firstVertex, size, self.getVertexEdge(firstVertex, size))
         
         # Loop until all frontiers visited
         while frontiers:
             nextVertex = random.choice(frontiers)
             
-            adjacent = mazeTree.getConnections(nextVertex)
+            adjacent = mazeTree.tree.getConnections(nextVertex)
             
             # Find adjacent vertices that have been visited to join
             mergeWith = []
