@@ -62,7 +62,6 @@ class MazeTree():
                 self.tree.addWeightedConnection(vertexID, above, self.getNewWeight(size))
             if below != -1 and not self.tree.connectionExist(vertexID, below):
                 self.tree.addWeightedConnection(vertexID, below, self.getNewWeight(size))
-            
                 
     def getNewWeight(self, size):
         # Total number of connections needed squared to give plenty

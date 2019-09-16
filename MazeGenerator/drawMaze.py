@@ -3,23 +3,23 @@ import turtle
 class DrawMaze():
     
     def __init__(self, size, pensize):
+        self.size = size # Length of (size x size) maze
+        self.pensize = pensize
+        
         self.wn = turtle.Screen()
         self.pen = turtle.Turtle()
         
         self.wn_width = 1000
         self.wn_height = 1000
         
-        self.pensize = pensize
-        
         self.startX = -((self.wn_width-100)/2)
         self.startY = (self.wn_height-100)/2
         
         self.cellLength = ((self.wn_width-100)/size)
         
-        self.drawInitialGrid(size)
+        self.drawInitialGrid()
         
-    def drawInitialGrid(self, size):
-        
+    def drawInitialGrid(self):
         self.wn.title("Maze")
         self.wn.bgcolor("white")
         
@@ -33,21 +33,21 @@ class DrawMaze():
         turtle.tracer(False)
         
         # Draw horizontal lines
-        for count in range(size + 1):
+        for count in range(self.size + 1):
             self.pen.up()
             self.pen.goto(self.startX, self.startY - (count * self.cellLength))
             self.pen.down()
-            forward = size * self.cellLength
+            forward = self.size * self.cellLength
             self.pen.forward(forward)
             
         self.pen._rotate(270)
             
         # Draw vertical lines
-        for count in range(size + 1):
+        for count in range(self.size + 1):
             self.pen.up()
-            self.pen.goto(self.startX + (count * self.cellLength), self.startY )
+            self.pen.goto(self.startX + (count * self.cellLength), self.startY)
             self.pen.down()
-            forward = size * self.cellLength
+            forward = self.size * self.cellLength
             self.pen.forward(forward)
         
         turtle.update()
@@ -65,7 +65,7 @@ class DrawMaze():
         
         turtle.update()
         
-    def createExit(self, vertex, size, edge):
+    def createExit(self, vertex, edge):
         # Get location vertex by length along edge either right or down 
             # (depending on edge)
         if edge == 't':
@@ -79,34 +79,34 @@ class DrawMaze():
             X2 = X1 + self.cellLength - self.pensize
             Y1 = Y2 = self.startY - (self.cellLength * size)
         elif edge == 'l':
-            location = vertex / size
+            location = vertex / self.size
             X1 = X2 = self.startX
             Y1 = self.startY - (location * self.cellLength) - self.pensize
             Y2 = Y1 - self.cellLength + self.pensize
         elif edge == 'r':
-            location = (vertex - (size - 1)) / size + 1
-            X1 = X2 = self.startX + (self.cellLength * size)
+            location = (vertex - (self.size - 1)) / self.size + 1
+            X1 = X2 = self.startX + (self.cellLength * self.size)
             Y1 = self.startY - (location * self.cellLength) - self.pensize
             Y2 = Y1 + self.cellLength + self.pensize
             
         self.removeEdge(X1, Y1, X2, Y2)
             
-    def getTopLeftCornerXCoords(self, vertexID, size):
-        return self.startX + (self.cellLength * ((vertexID + size) % size))
+    def getTopLeftCornerXCoords(self, vertexID):
+        return self.startX + (self.cellLength * ((vertexID + self.size) % self.size))
         
-    def getTopLeftCornerYCoords(self, vertexID, size):
-        return self.startY - (self.cellLength * (vertexID//size))
+    def getTopLeftCornerYCoords(self, vertexID):
+        return self.startY - (self.cellLength * (vertexID//self.size))
             
-    def mergeCells(self, nextVertex, mergeVertex, size):
+    def mergeCells(self, nextVertex, mergeVertex):
         # Get coordinates of top left corner of vertex cell
-        nextVertexXCoord = self.getTopLeftCornerXCoords(nextVertex, size)
-        nextVertexYCoord = self.getTopLeftCornerYCoords(nextVertex, size)
-        mergeVertexXCoord = self.getTopLeftCornerXCoords(mergeVertex, size)
-        mergeVertexYCoord = self.getTopLeftCornerYCoords(mergeVertex, size)
+        nextVertexXCoord = self.getTopLeftCornerXCoords(nextVertex)
+        nextVertexYCoord = self.getTopLeftCornerYCoords(nextVertex)
+        mergeVertexXCoord = self.getTopLeftCornerXCoords(mergeVertex)
+        mergeVertexYCoord = self.getTopLeftCornerYCoords(mergeVertex)
         
         # Get edge the of nextVertex cell that mergeVertex is adjacent.
         # mergeVertex above nextVertex
-        if nextVertex == mergeVertex + size:
+        if nextVertex == mergeVertex + self.size:
             # Top left corner of nextVertex
             X1 = nextVertexXCoord + self.pensize
             Y1 = nextVertexYCoord
@@ -115,7 +115,7 @@ class DrawMaze():
             Y2 = mergeVertexYCoord - self.cellLength
             self.removeEdge(X1, Y1, X2, Y2)
         # mergeVertex below nextVertex
-        elif nextVertex + size == mergeVertex:
+        elif nextVertex + self.size == mergeVertex:
             # Bottom left corner of nextVertex
             X1 = nextVertexXCoord + self.pensize
             Y1 = nextVertexYCoord - self.cellLength

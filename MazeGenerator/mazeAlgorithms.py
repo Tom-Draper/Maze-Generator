@@ -67,7 +67,7 @@ class MazeAlgorithms():
         frontiers += mazeTree.tree.getConnections(nextVertex)
         
         # Draw the exit next to the first vertex
-        draw.createExit(nextVertex, size, self.getVertexEdge(nextVertex, size))
+        draw.createExit(nextVertex, self.getVertexEdge(nextVertex, size))
         
         # Loop until all frontiers visited
         while frontiers:
@@ -91,6 +91,7 @@ class MazeAlgorithms():
             visited.append(nextVertex)
             frontiers.remove(nextVertex)
             
-            draw.mergeCells(nextVertex, mergeVertex, size)
+            draw.mergeCells(nextVertex, mergeVertex)
+            mazeTree.tree.removeConnection(nextVertex, mergeVertex)
             
             
