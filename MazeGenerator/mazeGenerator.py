@@ -1,19 +1,31 @@
+import sys
 from mazeTree import MazeTree
 from drawMaze import DrawMaze
-from mazeAlgorithms import MazeAlgorithms
+from primsAlgorithm import PrimsAlgorithm
 
+# Defaults
 size = 10
+display = True
 
+# Get any command line inputs
+for i in range(len(sys.argv)):
+    if sys.argv[i].lower() == 'true':
+        display = True
+    elif sys.argv[i].lower() == 'false':
+        disply = False
+    elif sys.argv[i].isdigit():
+        size = int(sys.argv[i])
+    
 # Create initial maze weighted tree (grid)
-mazeTree = MazeTree(size)
+mazeTree = MazeTree(size, display)
 mazeTree.tree.displayTree() # Display vertices and connections
 
 # Draw initial maze grid
-draw = DrawMaze(size, pensize=3)
+draw = DrawMaze(size, 3, display)
 
 # Apply prim's algorithm to maze tree and display
-algorithm = MazeAlgorithms()
-algorithm.primsAlgorithm(size, mazeTree, draw)
+primsAlgorithm = PrimsAlgorithm(mazeTree, draw)
+primsAlgorithm.run()
 
 mazeTree.tree.displayTree() # Display vertices and connections
 

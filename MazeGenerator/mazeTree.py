@@ -3,69 +3,70 @@ import random
 
 class MazeTree():
     
-    def __init__(self, size):
-        self.tree = Tree()
+    def __init__(self, size, display):
+        self.size = size
+        self.tree = Tree(display)
         self.usedWeights = []
         
-        self.createTree(size)
-        self.initConnections(size)
+        self.createTree()
+        self.initConnections()
         
-    def createTree(self, size):
+    def createTree(self):
         # Create size squared vertices 
-        for vertexID in range(size * size):
+        for vertexID in range(self.size * self.size):
             self.tree.addVertex(vertexID)
             
-    def getVertexAbove(self, size, vertexID):
+    def getVertexAbove(self, vertexID):
         # If vertex in top row
-        if vertexID < size:
+        if vertexID < self.size:
             return -1
         else:
-            return vertexID - size
+            return vertexID - self.size
             
-    def getVertexBelow(self, size, vertexID):
+    def getVertexBelow(self, vertexID):
         # If vertex in bottom row
-        if vertexID >= (size * (size - 1)):
+        if vertexID >= (self.size * (self.size - 1)):
             return -1
         else:
-            return vertexID + size
+            return vertexID + self.size
         
-    def getVertexLeft(self, size, vertexID):
+    def getVertexLeft(self, vertexID):
         # If vertex in left column
-        if (vertexID + size) % size == 0:
+        if (vertexID + self.size) % self.size == 0:
             return -1
         else:
             return vertexID - 1
         
-    def getVertexRight(self, size, vertexID):
+    def getVertexRight(self, vertexID):
         # If vertex in left column
-        if (vertexID + 1) % size == 0:
+        if (vertexID + 1) % self.size == 0:
             return -1
         else:
             return vertexID + 1
             
-    def initConnections(self, size):
+    def initConnections(self):
         # Loop through each vertex in the maze
-        for vertexID in range(size*size):
+        for vertexID in range(self.size * self.size):
             # Get the each adjacent vertex to current (if exists)
-            left = self.getVertexLeft(size, vertexID)
-            right = self.getVertexRight(size, vertexID)
-            above = self.getVertexAbove(size, vertexID)
-            below = self.getVertexBelow(size, vertexID)
+            left = self.getVertexLeft(vertexID)
+            right = self.getVertexRight(vertexID)
+            above = self.getVertexAbove(vertexID)
+            below = self.getVertexBelow(vertexID)
             
             # If an adjacent vertex exists, and connection between two doesn't
                 # already exist, create connection with random weight
             if left != -1 and not self.tree.connectionExist(vertexID, left):
-                self.tree.addWeightedConnection(vertexID, left, self.getNewWeight(size))
+                self.tree.addWeightedConnection(vertexID, left, self.getNewWeight())
             if right != -1 and not self.tree.connectionExist(vertexID, right):
-                self.tree.addWeightedConnection(vertexID, right, self.getNewWeight(size))
+                self.tree.addWeightedConnection(vertexID, right, self.getNewWeight())
             if above != -1 and not self.tree.connectionExist(vertexID, above):
-                self.tree.addWeightedConnection(vertexID, above, self.getNewWeight(size))
+                self.tree.addWeightedConnection(vertexID, above, self.getNewWeight())
             if below != -1 and not self.tree.connectionExist(vertexID, below):
-                self.tree.addWeightedConnection(vertexID, below, self.getNewWeight(size))
+                self.tree.addWeightedConnection(vertexID, below, self.getNewWeight())
                 
-    def getNewWeight(self, size):
+    def getNewWeight(self):
         # Total number of connections needed squared to give plenty
-        maxWeight = (((size-1) * size * 2) - 1) ** 2 
+        maxWeight = (((self.size-1) * self.size * 2) - 1) ** 2 
         
         # Get a unique weight
         weight = random.randint(0, maxWeight)

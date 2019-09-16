@@ -2,14 +2,16 @@ from vertex import Vertex
 
 class Tree():
     
-    def __init__(self):
+    def __init__(self, display):
+        self.display = display # Display updates to console (boolean)
         self.vertices = {}  # Example: {0(ID) : {1(vertexID):4(weight), 5(vertexID):4(weight)}, 
                             #           1 : {0:4, 2:6, 6:3}, ...}
 
     def addVertex(self, vertexID):
         # If vertex id not found, add vertex to vertices dict
         if vertexID in self.vertices.keys():
-            print('Vertex ID already exists.')
+            if self.display:
+                print('Vertex ID already exists.')
         else:
             self.vertices[vertexID] = {} # Add id with no connections
             
@@ -17,8 +19,9 @@ class Tree():
         # If vertex id found, remove vertex from vertices dict
         if vertexID in self.vertices.keys():
             del self.vertices[vertexID]
-            print('Vertex removed.')
-        else:
+            if self.display:
+                print('Vertex removed.')
+        elif self.display:
             print('Vertex ' + str(vertexID) + ' not found.')
             
     def addConnection(self, firstId, secondId):
@@ -28,12 +31,13 @@ class Tree():
             if not secondId in self.vertices[firstId]:
                 self.vertices[firstId][secondId] = 1
                 self.vertices[secondId][firstId] = 1
-                print('Added connection between vertex ' + str(firstId) + ' and ' 
-                      + str(secondId) + '.')
-            else:
+                if self.display:
+                    print('Added connection between vertex ' + str(firstId) + ' and ' 
+                          + str(secondId) + '.')
+            elif self.display:
                 print('There is already a connection between vertex ' + 
                       str(firstId) + ' and ' + str(secondId))
-        else:
+        elif self.display:
             print('Vertex not found.')
             
     def addWeightedConnection(self, firstId, secondId, weight):
@@ -43,12 +47,13 @@ class Tree():
             if not secondId in self.vertices[firstId]:
                 self.vertices[firstId][secondId] = weight
                 self.vertices[secondId][firstId] = weight
-                print('Added weight ' + str(weight) + ' between vertex ' 
-                    + str(firstId) + ' and ' + str(secondId) + '.')
-            else:
+                if self.display:
+                    print('Added weight ' + str(weight) + ' between vertex ' 
+                          + str(firstId) + ' and ' + str(secondId) + '.')
+            elif self.display:
                 print('There is already a connection between vertex ' + 
                       str(firstId) + ' and ' + str(secondId))
-        else:
+        elif self.display:
             print('Vertex not found.')
             
     def removeConnection(self, firstId, secondId):
@@ -58,12 +63,13 @@ class Tree():
             if secondId in self.vertices[firstId]:
                 del self.vertices[firstId][secondId]
                 del self.vertices[secondId][firstId]
-                print('Removed connection between vertex ' + str(firstId) + ' and ' 
-                      + str(secondId) + '.')
-            else:
+                if self.display:
+                    print('Removed tree connection between vertex ' + str(firstId) +
+                          ' and ' + str(secondId) + '.')
+            elif self.display:
                 print('Connection doesn\'t exist between vertex ' + str(firstId)
                       + str(secondId) + '.')
-        else:
+        elif self.display:
             print('Vertex not found.')
             
     def connectionExist(self, firstId, secondId):
@@ -72,22 +78,24 @@ class Tree():
             return True
         
     def getConnections(self, vertexID):
-        
         connections = (tuple(self.vertices[vertexID].keys()))
     
         return list(connections)
             
     def displayTree(self):
-        # Check if dictionary empty
-        if self.vertices:
-            print('Vertices:')
+        if self.display:
+            # Check if dictionary empty
+            if self.vertices:
+                print('\nVertices:')
+            else:
+                print('No vertices found.')
+            
+            # Print each vertex idand its connections
+            for vertexID in self.vertices.keys():
+                connections = self.vertices[vertexID]
+                print(str(vertexID) + ': ' + str(connections))
         else:
-            print('No vertices found.')
-        
-        # Print each vertex idand its connections
-        for vertexID in self.vertices.keys():
-            connections = self.vertices[vertexID]
-            print(str(vertexID) + ': ' + str(connections))
+            print("Cannot display vertices: display is disabled.")
 
 
     
