@@ -65,7 +65,8 @@ class MazeTree():
             
                 
     def getNewWeight(self, size):
-        maxWeight = ((size-1) * size * 2) - 1 # Total number of connections
+        # Total number of connections needed squared to give plenty
+        maxWeight = (((size-1) * size * 2) - 1) ** 2 
         
         # Get a unique weight
         weight = random.randint(0, maxWeight)

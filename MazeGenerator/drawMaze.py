@@ -2,14 +2,14 @@ import turtle
 
 class DrawMaze():
     
-    def __init__(self, size):
+    def __init__(self, size, pensize):
         self.wn = turtle.Screen()
         self.pen = turtle.Turtle()
         
         self.wn_width = 1000
         self.wn_height = 1000
         
-        self.pensize = 3
+        self.pensize = pensize
         
         self.startX = -((self.wn_width-100)/2)
         self.startY = (self.wn_height-100)/2
@@ -55,7 +55,7 @@ class DrawMaze():
     def removeEdge(self, X1, Y1, X2, Y2):
         self.pen = turtle.Turtle()
         self.pen.color("white")
-        self.pen.pensize(3)
+        self.pen.pensize(self.pensize)
         self.pen.hideturtle()
         
         self.pen.up()
@@ -103,16 +103,6 @@ class DrawMaze():
         nextVertexYCoord = self.getTopLeftCornerYCoords(nextVertex, size)
         mergeVertexXCoord = self.getTopLeftCornerXCoords(mergeVertex, size)
         mergeVertexYCoord = self.getTopLeftCornerYCoords(mergeVertex, size)
-        
-        '''
-        self.pen.up()
-        self.pen.goto(nextVertexXCoord, nextVertexYCoord)
-        self.pen.color("green")
-        self.pen.down()
-        self.pen.goto(mergeVertexXCoord, mergeVertexYCoord)
-        
-        turtle.update()
-        '''
         
         # Get edge the of nextVertex cell that mergeVertex is adjacent.
         # mergeVertex above nextVertex
