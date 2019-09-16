@@ -5,7 +5,7 @@ from drawMaze import DrawMaze
 from primsAlgorithm import PrimsAlgorithm
 
 # Defaults
-size = 15
+size = 20
 displayDetail = False
 
 # Get any command line inputs
@@ -17,7 +17,7 @@ for arg in range(len(sys.argv)):
     elif sys.argv[arg].isdigit():
         size = int(sys.argv[arg])
     
-progressBar = ProgressBar(displayDetail, updateFreq=30)
+progressBar = ProgressBar(displayDetail, updateFreq=20)
 
 # Create initial maze weighted tree (grid)
 mazeTree = MazeTree(size, displayDetail, progressBar)
