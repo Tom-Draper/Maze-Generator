@@ -4,17 +4,17 @@ from drawMaze import DrawMaze
 from primsAlgorithm import PrimsAlgorithm
 
 # Defaults
-size = 10
+size = 100
 display = True
 
 # Get any command line inputs
-for i in range(len(sys.argv)):
-    if sys.argv[i].lower() == 'true':
+for arg in range(len(sys.argv)):
+    if sys.argv[arg].lower() == 'true':
         display = True
-    elif sys.argv[i].lower() == 'false':
+    elif sys.argv[arg].lower() == 'false':
         disply = False
-    elif sys.argv[i].isdigit():
-        size = int(sys.argv[i])
+    elif sys.argv[arg].isdigit():
+        size = int(sys.argv[arg])
     
 # Create initial maze weighted tree (grid)
 mazeTree = MazeTree(size, display)
