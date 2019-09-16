@@ -5,7 +5,7 @@ from drawMaze import DrawMaze
 from primsAlgorithm import PrimsAlgorithm
 
 # Defaults
-size = 20
+size = 50
 displayDetail = False
 
 # Get any command line inputs
@@ -16,6 +16,7 @@ for arg in range(len(sys.argv)):
         displyDetail = False
     elif sys.argv[arg].isdigit():
         size = int(sys.argv[arg])
+        
     
 progressBar = ProgressBar(displayDetail, updateFreq=20)
 

@@ -15,22 +15,22 @@ class ProgressBar():
         if value < 1.0:
             value = value * 100
             
-        barNumber = int(value // 10)
+        barNumber = int(value // 5)
         
-        if barNumber >= 5:
-            beforeBars = 5
+        if barNumber >= 10:
+            beforeBars = 10
         else:
             beforeBars = barNumber
-        beforeSpaces = 5 - beforeBars
+        beforeSpaces = 10 - beforeBars
         
-        if barNumber <= 6:
+        if barNumber <= 11:
             afterBars = 0
         else:
-            afterBars = barNumber - 5
-        afterSpaces = 5 - afterBars
+            afterBars = barNumber - 10
+        afterSpaces = 10 - afterBars
         
         print('[ ' + (beforeBars * '-') + (beforeSpaces * ' ') +
-              ' ' + str(round(value, 2)) + '% ' +
+              ' ' + str(round(value, 1)) + '% ' +
               (afterBars * '-') + (afterSpaces * ' ') + ' ]')
     
     def displayCreateTreeProgress(self, progress):
