@@ -4,7 +4,7 @@ class MazeAlgorithm():
     
     def __init__(self, mazeTree, draw):
         self.size = mazeTree.size
-        self.display = mazeTree.tree.display
+        self.displayDetail = mazeTree.tree.displayDetail
         self.mazeTree = mazeTree
         self.draw = draw
         

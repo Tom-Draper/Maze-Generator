@@ -3,18 +3,25 @@ import random
 
 class MazeTree():
     
-    def __init__(self, size, display):
+    def __init__(self, size, displayDetail, progressBar):
         self.size = size
-        self.tree = Tree(display)
+        self.progressBar = progressBar
+        self.tree = Tree(displayDetail)
         self.usedWeights = []
         
         self.createTree()
         self.initConnections()
         
     def createTree(self):
+        maxVertexID = self.size * self.size
         # Create size squared vertices 
-        for vertexID in range(self.size * self.size):
+        for vertexID in range(maxVertexID):
             self.tree.addVertex(vertexID)
+            
+            # Update creating tree progress bar
+            updateBar = random.randint(0, self.progressBar.updateFreq)
+            if not self.tree.displayDetail and updateBar == 0:
+                self.progressBar.displayCreateTreeProgress(vertexID / maxVertexID)
             
     def getVertexAbove(self, vertexID):
         # If vertex in top row
@@ -45,8 +52,9 @@ class MazeTree():
             return vertexID + 1
             
     def initConnections(self):
+        maxVertexID = self.size * self.size
         # Loop through each vertex in the maze
-        for vertexID in range(self.size * self.size):
+        for vertexID in range(maxVertexID):
             # Get the each adjacent vertex to current (if exists)
             left = self.getVertexLeft(vertexID)
             right = self.getVertexRight(vertexID)
@@ -63,6 +71,11 @@ class MazeTree():
                 self.tree.addWeightedConnection(vertexID, above, self.getNewWeight())
             if below != -1 and not self.tree.connectionExist(vertexID, below):
                 self.tree.addWeightedConnection(vertexID, below, self.getNewWeight())
+            
+            # Update adding weights progress bar
+            updateBar = random.randint(0, self.progressBar.updateFreq)
+            if not self.tree.displayDetail and updateBar == 0:
+                self.progressBar.displayAddWeightsProgress(vertexID / maxVertexID)
                 
     def getNewWeight(self):
         # Total number of connections needed squared to give plenty

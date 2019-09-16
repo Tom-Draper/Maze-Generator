@@ -2,10 +2,10 @@ import turtle
 
 class DrawMaze():
     
-    def __init__(self, size, pensize, display):
+    def __init__(self, size, pensize, displayDetail):
         self.size = size # Length of (size x size) maze
         self.pensize = pensize
-        self.display = display
+        self.displayDetail = displayDetail
         
         self.wn = turtle.Screen()
         self.pen = turtle.Turtle()
@@ -144,7 +144,7 @@ class DrawMaze():
             self.removeEdge(X1, Y1, X2, Y2)
             
         # If display enabled, display update
-        if self.display:
+        if self.displayDetail:
             print('Erased maze edge between ' + str(nextVertex) + ' and ' + 
                   str(mergeVertex) + '.') 
     

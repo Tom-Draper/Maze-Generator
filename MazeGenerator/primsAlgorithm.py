@@ -7,7 +7,7 @@ class PrimsAlgorithm(MazeAlgorithm):
         super().__init__(mazeTree, draw)
     
     def run(self):
-        if self.display:
+        if self.displayDetail:
             print('\nPrim\'s Algorithm on a ' + str(self.size) + ' x ' + str(self.size) + ' maze.\n')
             
         starterVertices = super().getOuterVertices()
@@ -45,3 +45,11 @@ class PrimsAlgorithm(MazeAlgorithm):
             
             self.draw.mergeCells(nextVertex, mergeVertex)
             self.mazeTree.tree.removeConnection(nextVertex, mergeVertex)
+            
+            # Update algorithm progress bar
+            updateBar = random.randint(0, self.mazeTree.progressBar.updateFreq)
+            if not self.mazeTree.tree.displayDetail and updateBar == 0:
+                maxVertexID = self.size * self.size
+                self.mazeTree.progressBar.displayAlgorithmProgress(len(self.visited) / maxVertexID)
+        
+        self.mazeTree.progressBar.displayAlgorithmProgress(100)
