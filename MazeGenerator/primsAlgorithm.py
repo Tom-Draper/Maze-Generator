@@ -3,8 +3,8 @@ from mazeAlgorithm import MazeAlgorithm
 
 class PrimsAlgorithm(MazeAlgorithm):
     
-    def __init__(self, mazeTree, draw):
-        super().__init__(mazeTree, draw)
+    def __init__(self, mazeGraph, draw):
+        super().__init__(mazeGraph, draw)
     
     def run(self):
         if self.displayDetail:
@@ -16,7 +16,7 @@ class PrimsAlgorithm(MazeAlgorithm):
         
         self.visited.append(nextVertex)
         # Store adjacent vertices to first visited
-        self.frontiers += self.mazeTree.tree.getConnections(nextVertex)
+        self.frontiers += self.mazeGraph.graph.getConnections(nextVertex)
         
         # Draw the exit next to the first vertex
         self.draw.createExit(nextVertex, super().getVertexEdge(nextVertex))
@@ -25,7 +25,7 @@ class PrimsAlgorithm(MazeAlgorithm):
         while self.frontiers:
             nextVertex = random.choice(self.frontiers)
             
-            adjacent = self.mazeTree.tree.getConnections(nextVertex)
+            adjacent = self.mazeGraph.graph.getConnections(nextVertex)
             
             # Find adjacent vertices that have been visited to join
             mergeWith = []
@@ -44,12 +44,12 @@ class PrimsAlgorithm(MazeAlgorithm):
             self.frontiers.remove(nextVertex)
             
             self.draw.mergeCells(nextVertex, mergeVertex)
-            self.mazeTree.tree.removeConnection(nextVertex, mergeVertex)
+            self.mazeGraph.graph.removeConnection(nextVertex, mergeVertex)
             
             # Update algorithm progress bar
-            updateBar = random.randint(0, self.mazeTree.progressBar.updateFreq)
-            if not self.mazeTree.tree.displayDetail and updateBar == 0:
+            updateBar = random.randint(0, self.mazeGraph.progressBar.updateFreq)
+            if not self.mazeGraph.graph.displayDetail and updateBar == 0:
                 maxVertexID = self.size * self.size
-                self.mazeTree.progressBar.displayAlgorithmProgress(len(self.visited) / maxVertexID)
+                self.mazeGraph.progressBar.displayAlgorithmProgress(len(self.visited) / maxVertexID)
         
-        self.mazeTree.progressBar.displayAlgorithmProgress(100)
+        self.mazeGraph.progressBar.displayAlgorithmProgress(100)

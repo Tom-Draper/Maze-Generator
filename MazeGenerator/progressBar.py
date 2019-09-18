@@ -33,17 +33,17 @@ class ProgressBar():
               ' ' + str(round(value, 1)) + '% ' +
               (afterBars * '-') + (afterSpaces * ' ') + ' ]')
     
-    def displayCreateTreeProgress(self, progress):
+    def displayCreateGraphProgress(self, progress):
         if self.enabled:
             os.system('cls') # Clear console
 
-            print('Creating tree...')
+            print('Creating graph...')
             self.displayBar(progress)
         
     def displayAddWeightsProgress(self, progress):
         if self.enabled:
             os.system('cls') # Clear console
-            print('Created tree.')
+            print('Created graph.')
             self.displayBar(100)
             
             print('Adding weights...')
@@ -52,7 +52,7 @@ class ProgressBar():
     def displayAlgorithmProgress(self, progress):
         if self.enabled:
             os.system('cls') # Clear console
-            print('Created tree.')
+            print('Created graph.')
             self.displayBar(100)
             print('Added weights.')
             self.displayBar(100)

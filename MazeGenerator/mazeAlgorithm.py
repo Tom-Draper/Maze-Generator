@@ -2,10 +2,10 @@ import random
 
 class MazeAlgorithm():
     
-    def __init__(self, mazeTree, draw):
-        self.size = mazeTree.size
-        self.displayDetail = mazeTree.tree.displayDetail
-        self.mazeTree = mazeTree
+    def __init__(self, mazeGraph, draw):
+        self.size = mazeGraph.size
+        self.displayDetail = mazeGraph.graph.displayDetail
+        self.mazeGraph = mazeGraph
         self.draw = draw
         
         self.visited = []

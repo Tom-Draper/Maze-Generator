@@ -1,6 +1,6 @@
 import sys
 from progressBar import ProgressBar
-from mazeTree import MazeTree
+from mazeGraph import MazeGraph
 from drawMaze import DrawMaze
 from primsAlgorithm import PrimsAlgorithm
 
@@ -17,20 +17,20 @@ for arg in range(len(sys.argv)):
     elif sys.argv[arg].isdigit():
         size = int(sys.argv[arg])
         
-    
+# Create a progress bar for the graph creation
 progressBar = ProgressBar(displayDetail, updateFreq=20)
 
-# Create initial maze weighted tree (grid)
-mazeTree = MazeTree(size, displayDetail, progressBar)
-mazeTree.tree.displayTree() # Display vertices and connections
+# Create initial maze weighted graph (grid)
+mazeGraph = MazeGraph(size, displayDetail, progressBar)
+mazeGraph.graph.displayGraph() # Display vertices and connections
 
 # Draw initial maze grid
 draw = DrawMaze(size, 3, displayDetail)
 
-# Apply prim's algorithm to maze tree and display
-primsAlgorithm = PrimsAlgorithm(mazeTree, draw)
+# Apply prim's algorithm to maze graph and display
+primsAlgorithm = PrimsAlgorithm(mazeGraph, draw)
 primsAlgorithm.run()
 
-mazeTree.tree.displayTree() # Display vertices and connections
+mazeGraph.graph.displaygraph() # Display vertices and connections
 
 draw.finish()

@@ -1,27 +1,27 @@
-from tree import Tree
+from graph import Graph
 import random
 
-class MazeTree():
+class MazeGraph():
     
     def __init__(self, size, displayDetail, progressBar):
         self.size = size
         self.progressBar = progressBar
-        self.tree = Tree(displayDetail)
+        self.graph = Graph(displayDetail)
         self.usedWeights = []
         
-        self.createTree()
+        self.createGraph()
         self.initConnections()
         
-    def createTree(self):
+    def createGraph(self):
         maxVertexID = self.size * self.size
         # Create size squared vertices 
         for vertexID in range(maxVertexID):
-            self.tree.addVertex(vertexID)
+            self.graph.addVertex(vertexID)
             
-            # Update creating tree progress bar
+            # Update creating graph progress bar
             updateBar = random.randint(0, self.progressBar.updateFreq)
-            if not self.tree.displayDetail and updateBar == 0:
-                self.progressBar.displayCreateTreeProgress(vertexID / maxVertexID)
+            if not self.graph.displayDetail and updateBar == 0:
+                self.progressBar.displayCreateGraphProgress(vertexID / maxVertexID)
             
     def getVertexAbove(self, vertexID):
         # If vertex in top row
@@ -63,18 +63,18 @@ class MazeTree():
             
             # If an adjacent vertex exists, and connection between two doesn't
                 # already exist, create connection with random weight
-            if left != -1 and not self.tree.connectionExist(vertexID, left):
-                self.tree.addWeightedConnection(vertexID, left, self.getNewWeight())
-            if right != -1 and not self.tree.connectionExist(vertexID, right):
-                self.tree.addWeightedConnection(vertexID, right, self.getNewWeight())
-            if above != -1 and not self.tree.connectionExist(vertexID, above):
-                self.tree.addWeightedConnection(vertexID, above, self.getNewWeight())
-            if below != -1 and not self.tree.connectionExist(vertexID, below):
-                self.tree.addWeightedConnection(vertexID, below, self.getNewWeight())
+            if left != -1 and not self.graph.connectionExist(vertexID, left):
+                self.graph.addWeightedConnection(vertexID, left, self.getNewWeight())
+            if right != -1 and not self.graph.connectionExist(vertexID, right):
+                self.graph.addWeightedConnection(vertexID, right, self.getNewWeight())
+            if above != -1 and not self.graph.connectionExist(vertexID, above):
+                self.graph.addWeightedConnection(vertexID, above, self.getNewWeight())
+            if below != -1 and not self.graph.connectionExist(vertexID, below):
+                self.graph.addWeightedConnection(vertexID, below, self.getNewWeight())
             
             # Update adding weights progress bar
             updateBar = random.randint(0, self.progressBar.updateFreq)
-            if not self.tree.displayDetail and updateBar == 0:
+            if not self.graph.displayDetail and updateBar == 0:
                 self.progressBar.displayAddWeightsProgress(vertexID / maxVertexID)
                 
     def getNewWeight(self):

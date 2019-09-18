@@ -1,6 +1,6 @@
 from vertex import Vertex
 
-class Tree():
+class Graph():
     
     def __init__(self, displayDetail):
         self.displayDetail = displayDetail # Display updates to console (boolean)
@@ -64,7 +64,7 @@ class Tree():
                 del self.vertices[firstId][secondId]
                 del self.vertices[secondId][firstId]
                 if self.displayDetail:
-                    print('Removed tree connection between vertex ' + str(firstId) +
+                    print('Removed graph connection between vertex ' + str(firstId) +
                           ' and ' + str(secondId) + '.')
             elif self.displayDetail:
                 print('Connection doesn\'t exist between vertex ' + str(firstId)
@@ -82,7 +82,7 @@ class Tree():
     
         return list(connections)
             
-    def displayTree(self):
+    def displayGraph(self):
         if self.displayDetail:
             # Check if dictionary empty
             if self.vertices:
