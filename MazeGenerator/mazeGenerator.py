@@ -8,7 +8,7 @@ from primsAlgorithm import PrimsAlgorithm
 size = 50
 displayDetail = False
 
-# Get any command line inputs
+# Get any command line inputs to overwrite size and displayDetail
 for arg in range(len(sys.argv)):
     if sys.argv[arg].lower() == 'true':
         displayDetail = True
@@ -31,6 +31,5 @@ draw = DrawMaze(size, 3, displayDetail)
 primsAlgorithm = PrimsAlgorithm(mazeGraph, draw)
 primsAlgorithm.run()
 
-mazeGraph.graph.displaygraph() # Display vertices and connections
-
+mazeGraph.graph.displayGraph() # Display vertices and connections
 draw.finish()
