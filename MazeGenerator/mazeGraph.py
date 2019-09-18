@@ -101,9 +101,9 @@ class MazeGraph():
               
     # Generate and return a new unique weight  
     def getNewWeight(self):
-        # Total number of connections needed multipled by 10 to give plenty
+        # Total number of connections needed multipled by 100 to give plenty
         # of possible weights and result chance of recalculation
-        maxWeight = (((self.size-1) * self.size * 2) - 1) ** 2
+        maxWeight = (((self.size-1) * self.size * 2) - 1) * 100
         
         # Get a unique weight
         weight = random.randint(0, maxWeight)

@@ -7,8 +7,8 @@ from primsAlgorithm import PrimsAlgorithm
 # Defaults
 size = 50
 displayDetail = False
-pensize = 3
-progBarUpdateFreq = 30
+pensize = 20
+progBarUpdateFreq = 30 # 1 out of progBarUpdateFreq chance
 
 gotSizeInput = False
 # Get any command line inputs to overwrite size and displayDetail

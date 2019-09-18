@@ -26,11 +26,11 @@ class DrawMaze():
     def drawInitialGrid(self):
         # Set up window
         self.wn.title("Maze")
-        self.wn.bgcolor(bgColour)
+        self.wn.bgcolor(self.bgColour)
         self.wn.setup(self.wn_width, self.wn_height)
         
         # Set up drawing tool
-        self.pen.color(penColour)
+        self.pen.color(self.penColour)
         self.pen.hideturtle()
         self.pen.speed(0)
         self.pen.pensize(self.pensize)

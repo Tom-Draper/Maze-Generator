@@ -11,18 +11,23 @@ class MazeAlgorithm():
         self.visited = []
         self.frontiers = []
             
+    # Return vertices along the top row of the maze graph
     def getTopVertices(self):
         return [x for x in range(self.size)]
     
+    # Return vertices along the bottom row of the maze graph
     def getBottomVertices(self):
         return [x for x in range((self.size * self.size) - self.size, self.size*self.size)]
     
+    # Return vertices along the far left column of the maze graph
     def getLeftVertices(self):
         return [x * self.size for x in range(self.size)]
     
+    # Return vertices along the far right column of the maze graph
     def getRightVertices(self):
         return [(x + 1) * self.size - 1 for x in range(self.size)]
         
+    # Return vertices along the outer edges of the maze graph
     def getOuterVertices(self):
         # Create lists of vertices at edge of maze
         topVertices = self.getTopVertices()
@@ -32,6 +37,8 @@ class MazeAlgorithm():
         # Create one list of all vertices at edge of maze
         return topVertices + bottomVertices + leftVertices + rightVertices
     
+    # Get and return the outer maze edge a particular vertex lies in the form 
+    # of a character
     def getVertexEdge(self, vertex):
         # Create lists of vertices at edge of maze
         topVertices = self.getTopVertices()
