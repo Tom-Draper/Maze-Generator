@@ -7,7 +7,10 @@ from primsAlgorithm import PrimsAlgorithm
 # Defaults
 size = 50
 displayDetail = False
+pensize = 3
+progBarUpdateFreq = 30
 
+gotSizeInput = False
 # Get any command line inputs to overwrite size and displayDetail
 for arg in range(len(sys.argv)):
     if sys.argv[arg].lower() == 'true':
@@ -16,16 +19,25 @@ for arg in range(len(sys.argv)):
         displyDetail = False
     elif sys.argv[arg].isdigit():
         size = int(sys.argv[arg])
+        gotSizeInput = True
+      
+# If size argument not found, get command line entry  
+if gotSizeInput == False:
+    enteredSize = input('Enter size of maze: ')
+    if enteredSize.isdigit():
+        size = int(enteredSize)
+    else:
+        print('Invalid size: taking default of ' + str(size))
         
 # Create a progress bar for the graph creation
-progressBar = ProgressBar(displayDetail, updateFreq=20)
+progressBar = ProgressBar(displayDetail, progBarUpdateFreq)
 
 # Create initial maze weighted graph (grid)
 mazeGraph = MazeGraph(size, displayDetail, progressBar)
 mazeGraph.graph.displayGraph() # Display vertices and connections
 
 # Draw initial maze grid
-draw = DrawMaze(size, 3, displayDetail)
+draw = DrawMaze(size, pensize, displayDetail)
 
 # Apply prim's algorithm to maze graph and display
 primsAlgorithm = PrimsAlgorithm(mazeGraph, draw)

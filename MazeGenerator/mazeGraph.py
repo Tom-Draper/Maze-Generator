@@ -31,7 +31,7 @@ class MazeGraph():
         maxVertexID = (self.size * self.size) - 1 # Largest vertex in square graph grid
         
         # Add each vertex to graph
-        for vertexID in range(maxVertexID):
+        for vertexID in range(maxVertexID + 1):
             self.graph.addVertex(vertexID)
             
             # Update creating graph progress bar
@@ -103,7 +103,7 @@ class MazeGraph():
     def getNewWeight(self):
         # Total number of connections needed multipled by 10 to give plenty
         # of possible weights and result chance of recalculation
-        maxWeight = (((self.size-1) * self.size * 2) - 1) * 10
+        maxWeight = (((self.size-1) * self.size * 2) - 1) ** 2
         
         # Get a unique weight
         weight = random.randint(0, maxWeight)
