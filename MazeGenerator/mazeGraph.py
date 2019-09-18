@@ -14,6 +14,7 @@ import random
 #  |   |   |   |   |
 # 20 -21 -22 -23 -24
 
+# Holds the functionality to create a new graph that is suitable for a maze
 class MazeGraph():
     
     def __init__(self, size, displayDetail, progressBar):

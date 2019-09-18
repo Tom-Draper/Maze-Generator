@@ -1,5 +1,8 @@
 import turtle
 
+# Holds the functionality to draw a maze using the Turtle module
+# Draws an initial grid of input dimensions
+# Removes select lines
 class DrawMaze():
     
     def __init__(self, size, pensize, displayDetail):

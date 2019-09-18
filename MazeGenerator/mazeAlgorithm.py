@@ -1,5 +1,7 @@
 import random
 
+# Holds the general functionality and structures used by a maze algorithm
+# Parent class of specific maze algorithm classes
 class MazeAlgorithm():
     
     def __init__(self, mazeGraph, draw):

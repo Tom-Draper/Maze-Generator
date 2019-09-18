@@ -1,11 +1,34 @@
 import random
 from mazeAlgorithm import MazeAlgorithm
 
+# Specific maze algorithm that uses the genral functions and structures from the 
+# MazeAlgorithm class
+
+# Prim's Algorithm
+# Works as follows:
+# Selects a starting cell (V1) on the edge of the maze, the outer maze wall 
+# is now the exit to the maze.
+# Cell v1 is the first to be visited and is added to the visited list.
+# Each cell adjacent to this starting cell is added to a list of frontier cells.
+# The next cell (V2) is selected from the frontier cells to merge.
+# Chosen cell V2 is then merged with starting cell V1.
+# Cell V2 has now been visited and added to the visited list and removed from
+# frontiers.
+# As cell V2 has now been visited, each adjacent cell to v2 (that has not 
+# already been visited) is added to the frontiers list.
+# The starting section of the algorithm is over.
+# Another cell (VX) is chosen from the list of frontiers and merged with an already 
+# visited cell next to it.
+# If a chosen frontier cell has multiple adjacent cells that are visited, one
+# is selected randomly.
+# This is repeated until no more frontier cells exist and each cell has been
+# visited.
 class PrimsAlgorithm(MazeAlgorithm):
     
     def __init__(self, mazeGraph, draw):
         super().__init__(mazeGraph, draw)
     
+    # Runs the algorithm on the maze graph
     def run(self):
         if self.displayDetail:
             print('\nPrim\'s Algorithm on a ' + str(self.size) + ' x ' + str(self.size) + ' maze.\n')
@@ -40,9 +63,10 @@ class PrimsAlgorithm(MazeAlgorithm):
             # Select vertex to merge with nextVertex
             mergeVertex = random.choice(mergeWith)
             
-            self.visited.append(nextVertex)
-            self.frontiers.remove(nextVertex)
+            self.visited.append(nextVertex) # Next vertex has now been visited
+            self.frontiers.remove(nextVertex) # Remove so cannot be selected again
             
+            # Erase line between maze cells and remove their connection
             self.draw.mergeCells(nextVertex, mergeVertex)
             self.mazeGraph.graph.removeConnection(nextVertex, mergeVertex)
             
@@ -52,4 +76,5 @@ class PrimsAlgorithm(MazeAlgorithm):
                 maxVertexID = self.size * self.size
                 self.mazeGraph.progressBar.displayAlgorithmProgress(len(self.visited) / maxVertexID)
         
+        # Display complete progress bar
         self.mazeGraph.progressBar.displayAlgorithmProgress(100)

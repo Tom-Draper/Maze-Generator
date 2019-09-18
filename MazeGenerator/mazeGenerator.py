@@ -7,7 +7,7 @@ from primsAlgorithm import PrimsAlgorithm
 # Defaults
 size = 50
 displayDetail = False
-pensize = 20
+pensize = 2
 progBarUpdateFreq = 30 # 1 out of progBarUpdateFreq chance
 
 gotSizeInput = False

@@ -1,3 +1,4 @@
+# Class that holds the functionality of a graph
 class Graph():
     
     def __init__(self, displayDetail):
