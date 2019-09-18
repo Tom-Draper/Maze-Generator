@@ -12,6 +12,8 @@ class DrawMaze():
         
         self.wn_width = 1000
         self.wn_height = 1000
+        self.penColour = 'black'
+        self.bgColour = 'white'
         
         self.startX = -((self.wn_width-100)/2)
         self.startY = (self.wn_height-100)/2
@@ -20,14 +22,15 @@ class DrawMaze():
         
         self.drawInitialGrid()
         
+    # Draw the intial maze grid
     def drawInitialGrid(self):
+        # Set up window
         self.wn.title("Maze")
-        self.wn.bgcolor("white")
-        
+        self.wn.bgcolor(bgColour)
         self.wn.setup(self.wn_width, self.wn_height)
         
         # Set up drawing tool
-        self.pen.color("black")
+        self.pen.color(penColour)
         self.pen.hideturtle()
         self.pen.speed(0)
         self.pen.pensize(self.pensize)
@@ -53,12 +56,15 @@ class DrawMaze():
         
         turtle.update()
         
+    # Draw line in background colour to remove edge
+    # Coodrinates of end of line to draw input 
     def removeEdge(self, X1, Y1, X2, Y2):
         self.pen = turtle.Turtle()
-        self.pen.color("white")
+        self.pen.color(self.bgColour)
         self.pen.pensize(self.pensize)
         self.pen.hideturtle()
         
+        # Erase line
         self.pen.up()
         self.pen.goto(X1, Y1)
         self.pen.down()
@@ -66,9 +72,10 @@ class DrawMaze():
         
         turtle.update()
         
+    # Remove edge adjacent to vertex given to create gap in outer wall
     def createExit(self, vertex, edge):
         # Get location vertex by length along edge either right or down 
-            # (depending on edge)
+        # (depending on edge)
         if edge == 't':
             location = vertex
             X1 = self.startX + location * self.cellLength + self.pensize
@@ -92,12 +99,18 @@ class DrawMaze():
             
         self.removeEdge(X1, Y1, X2, Y2)
             
+    # Return the x coordinate of the top left corner of a particular vertex/maze cell
     def getTopLeftCornerXCoords(self, vertexID):
         return self.startX + (self.cellLength * ((vertexID + self.size) % self.size))
         
+    # Return the y coordinate of the top left corner of a particular vertex/maze cell
     def getTopLeftCornerYCoords(self, vertexID):
         return self.startY - (self.cellLength * (vertexID//self.size))
             
+    # Removes line between two vertices/maze cells
+    # First gets coordinates of top left of both cells
+    # Then determines how both vertices are adjacent (above/below or left/right)
+    # Finally removes the edge between them based on this
     def mergeCells(self, nextVertex, mergeVertex):
         # Get coordinates of top left corner of vertex cell
         nextVertexXCoord = self.getTopLeftCornerXCoords(nextVertex)
