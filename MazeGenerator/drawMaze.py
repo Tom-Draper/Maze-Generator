@@ -164,6 +164,6 @@ class DrawMaze():
             print('Erased maze edge between ' + str(nextVertex) + ' and ' + 
                   str(mergeVertex) + '.') 
     
-    # Stop and keep window open
+    # Stop and wait for click
     def finish(self):
-        turtle.done()
+        self.wn.exitonclick()

@@ -20,6 +20,8 @@ class MazeGraph():
     def __init__(self, size, displayDetail, progressBar):
         self.size = size
         self.progressBar = progressBar
+        # Random number chosen in range, if matches progress bar updated
+        self.updateBar = random.randint(0, self.progressBar.updateFreq)
         self.graph = Graph(displayDetail) # Create empty graph object
         self.usedWeights = []
         
@@ -36,8 +38,7 @@ class MazeGraph():
             self.graph.addVertex(vertexID)
             
             # Update creating graph progress bar
-            updateBar = random.randint(0, self.progressBar.updateFreq)
-            if not self.graph.displayDetail and updateBar == 0:
+            if not self.graph.displayDetail and self.updateBar == 0:
                 self.progressBar.displayCreateGraphProgress(vertexID / maxVertexID)
             
     # Get the ID of the vertex above the input vertex in the grid graph
@@ -96,8 +97,7 @@ class MazeGraph():
                 self.graph.addWeightedConnection(vertexID, below, self.getNewWeight())
             
             # Update adding weights progress bar
-            updateBar = random.randint(0, self.progressBar.updateFreq)
-            if not self.graph.displayDetail and updateBar == 0:
+            if not self.graph.displayDetail and self.updateBar == 0:
                 self.progressBar.displayAddWeightsProgress(vertexID / maxVertexID)
               
     # Generate and return a new unique weight  
