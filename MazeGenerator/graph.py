@@ -15,7 +15,7 @@ class Graph():
         if vertexID in self.vertices.keys():
             if self.displayDetail: print('Vertex ID already exists.')
         else:
-            self.vertices[vertexID] = {} # Add id with no connections
+            self.vertices[vertexID] = {} # Add vertex id with no connections
             
     # Remove a vertex id given and connections from the vertices dictionary
     def removeVertex(self, vertexID):
@@ -32,7 +32,7 @@ class Graph():
         if firstId in self.vertices.keys() and secondId in self.vertices.keys():
             # If no connection exists, add connection
             if not secondId in self.vertices[firstId]:
-                self.vertices[firstId][secondId] = 1
+                self.vertices[firstId][secondId] = 1 # Add with no weight
                 self.vertices[secondId][firstId] = 1
                 if self.displayDetail: 
                     print('Added connection between vertex '+ str(firstId) + 

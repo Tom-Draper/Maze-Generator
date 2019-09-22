@@ -37,7 +37,7 @@ class MazeGraph():
         
     # Add each vertex to the graph object.
     def createGraph(self):
-        maxVertexID = (self.size * self.size) - 1 # Largest vertex in square graph grid
+        maxVertexID = (self.size * self.size) - 1
         
         # Add each vertex to graph.
         for vertexID in range(maxVertexID + 1):
