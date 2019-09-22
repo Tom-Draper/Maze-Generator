@@ -1,3 +1,5 @@
+# mazeAlgorithm.py - holds a class that is the parent of any maze algorithm.
+
 import random
 
 # Holds the general functionality and structures used by a maze algorithm

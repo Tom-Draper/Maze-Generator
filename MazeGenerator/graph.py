@@ -1,4 +1,6 @@
-# Class that holds the functionality of a graph
+# graph.py - holds a class that holds the functionality of a python graph.
+
+# Contains the functionality of a graph.
 class Graph():
     
     def __init__(self, displayDetail):

@@ -1,6 +1,10 @@
+# progressBar.py - holds a class that has functionality to display the progress
+# of a process.
+
 import os
 import math
 
+# Holds the functionality to display various progress bars during maze generation.
 class ProgressBar():
     
     def __init__(self, displayDetail, updateFreq):

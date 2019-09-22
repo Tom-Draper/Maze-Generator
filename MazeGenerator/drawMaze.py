@@ -1,8 +1,11 @@
+# drawMaze.py - a class that contains the functions needed to draw features of
+# a maze using the turtle module.
+
 import turtle
 
-# Holds the functionality to draw a maze using the Turtle module
-# Draws an initial grid of input dimensions
-# Removes select lines
+# Holds the functionality to draw a maze using the Turtle module.
+# Draws an initial maze grid of the input dimensions.
+# Can remove select lines to form the maze.
 class DrawMaze():
     
     def __init__(self, size, pensize, displayDetail):

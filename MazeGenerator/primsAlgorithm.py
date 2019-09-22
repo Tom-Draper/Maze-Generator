@@ -1,3 +1,7 @@
+# primsAlgorithm.py - holds a class that extends the mazeAlgorithm class and
+# alters both the drawn maze that is displayed, and the graph properties to
+# produce a randomly generated maze.
+
 import random
 from mazeAlgorithm import MazeAlgorithm
 

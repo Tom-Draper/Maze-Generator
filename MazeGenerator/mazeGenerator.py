@@ -1,3 +1,7 @@
+# mazeGenerator.py - the main program to run. Creates a maze graph and runs an
+# algorithm on the graph to form a maze. Allows user inputs of size of the maze
+# and whether to display generation details to console.
+
 import sys
 from progressBar import ProgressBar
 from mazeGraph import MazeGraph
@@ -6,9 +10,11 @@ from primsAlgorithm import PrimsAlgorithm
 
 # Defaults
 size = 50
+# If true, written details of progress displayed to console.
+# If false, simple progress bar displayed.
 displayDetail = False
 pensize = 2
-progBarUpdateFreq = 30 # 1 out of progBarUpdateFreq chance
+progBarUpdateFreq = 30 # 1 out of 'progBarUpdateFreq' chance to update
 
 gotSizeInput = False
 # Get any command line inputs to overwrite size and displayDetail
