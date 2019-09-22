@@ -18,6 +18,9 @@ import random
 # 20 -21 -22 -23 -24
 
 # Holds the functionality that creates a new graph suitable for a maze.
+# Each vertex represents an occupiable space inside the maze.
+# Each weighted connection made between vertices represents a wall between those
+# cells.
 class MazeGraph():
     
     def __init__(self, size, displayDetail, progressBar):

@@ -35,10 +35,10 @@ if gotSizeInput == False:
     else:
         print('Invalid size: taking default of ' + str(size))
         
-# Create a progress bar for the graph creation
+# Create a progress bar object ready for graph creation.
 progressBar = ProgressBar(displayDetail, progBarUpdateFreq)
 
-# Create initial maze weighted graph (grid)
+# Create initial maze weighted graph (grid of connected vertices).
 mazeGraph = MazeGraph(size, displayDetail, progressBar)
 mazeGraph.graph.displayGraph() # Display vertices and connections
 
