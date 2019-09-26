@@ -14,7 +14,7 @@ size = 50
 # If false, simple progress bar displayed.
 displayDetail = False
 pensize = 2
-progBarUpdateFreq = 30 # 1 out of 'progBarUpdateFreq' chance to update
+progBarUpdateFreq = 20 # 1 out of 'progBarUpdateFreq' chance to update
 
 gotSizeInput = False
 # Get any command line inputs to overwrite size and displayDetail
