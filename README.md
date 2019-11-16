@@ -1,6 +1,6 @@
 # Maze-Generator
 
-### Eductional Project  
+## Eductional Project  
 This project generates a random maze of a selected size and visualises the process. I started this project to graps some of the algorithms used for maze generation and visualise the steps an algorithm takes. Currently only Prim's Algorithm is implemented.
 
 ### Demo - Prim's Algorithm (20x20)
@@ -19,7 +19,7 @@ In future, I aim to increase the number of algorithms in this implementation as 
 
 -------------------------------------------------------
 
-### How to use:
+## How to use:
 
 Run mazeGenerator.py to begin maze generation. Optional arguments include a size one length of the maze, as well as a boolean value that determines whether details of generation are to be displayed to console. If set to false, a progress bar will be displayed instead.  
 Size defaults to 50 (50x50 maze).  
