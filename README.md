@@ -3,7 +3,7 @@
 ### Eductional Project  
 This project generates a random maze of a selected size and visualises the process. I started this project to graps some of the algorithms used for maze generation and visualise the steps an algorithm takes. Currently only Prim's Algorithm is implemented.
 
-## Demo
+## Demo - Prim's Algorithm (20x20)
 
 [![Demo Prim's Algorithm](https://media.giphy.com/media/S44bVOtLqbP49oyGPT/giphy.gif)](https://www.youtube.com/watch?v=lCfpZhXvS_Q)
 
