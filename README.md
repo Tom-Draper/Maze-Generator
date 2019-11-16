@@ -5,6 +5,8 @@ This project generates a random maze of a selected size and visualises the proce
 
 ## Demo
 
+[![Demo Prim's Algorithm](https://j.gifs.com/gZX48r.gif)](https://www.youtube.com/watch?v=lCfpZhXvS_Q)
+
 #### Project Aims:
 - Understand and implement a maze generation.
 - Work on effective commenting.
