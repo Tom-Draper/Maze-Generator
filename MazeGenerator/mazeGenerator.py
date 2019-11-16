@@ -13,7 +13,7 @@ size = 50
 # If true, written details of progress displayed to console.
 # If false, simple progress bar displayed.
 displayDetail = False
-pensize = 2
+pensize = 3
 progBarUpdateFreq = 20 # 1 out of 'progBarUpdateFreq' chance to update
 
 gotSizeInput = False
@@ -49,5 +49,6 @@ draw = DrawMaze(size, pensize, displayDetail)
 primsAlgorithm = PrimsAlgorithm(mazeGraph, draw)
 primsAlgorithm.run()
 
-mazeGraph.graph.displayGraph() # Display vertices and connections
+# Display vertices and connections
+mazeGraph.graph.displayGraph() 
 draw.finish()
