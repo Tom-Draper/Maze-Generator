@@ -21,6 +21,6 @@ In future, I aim to increase the number of algorithms in this implementation as 
 ## Getting Started
 Run mazeGenerator.py to begin maze generation.
 
-### Optional arguments
+#### Optional arguments
 - Size (-s int_value) - integer length of one side of the maze. Size defaults to 50 (50x50 maze).  
 - Display details (-d true/false) - If true, details of generation prints to console. If false, progress bar displayed in console instead. Display details defaults to false.
