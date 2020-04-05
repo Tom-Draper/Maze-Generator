@@ -7,18 +7,20 @@ This project generates a random maze of a selected size and visualises the proce
 [![Demo Prim's Algorithm](https://media.giphy.com/media/S44bVOtLqbP49oyGPT/giphy.gif)](https://www.youtube.com/watch?v=lCfpZhXvS_Q)
 
 #### Project Aims:
-- Understand and implement a maze generation.
-- Work on effective commenting.
+- Understand and implement a maze generation
+- Expand Python GUI skills
 
 #### What I Learned:
-- The general method of maze generation.
-- Prim's Algorithm.
+- General background of maze generation
+- Details and method of Prim's Algorithm
 
-In future, I aim to increase the number of algorithms in this implementation as alternatives to Prim's Algorithm. I could also extend this project to create a playable maze game. As this project was mostly about the visualisation aspect, the effeciency of the generation wasn't as important but with a game I could look into adding multithreading to this project to increase the speed of generation. 
+In future, I aim to increase the number of algorithms in this implementation as alternatives to Prim's Algorithm. For a future project I could extend this program to implement a playable maze game. I will need to revist the implementationa to improve efficiency as currently walls are removed by drawing over a wall with a line of the background colour. Using an alternative to Python's Turtle module could allow for more control over placing and removing walls and subsequently allow for a variable animation playback speed. As this project centred around the visualisation aspect, the effeciency of the display wasn't top priority. 
 
 -------------------------------------------------------
 
 ## Getting Started
-Run mazeGenerator.py to begin maze generation. Optional arguments include a size one length of the maze, as well as a boolean value that determines whether details of generation are to be displayed to console. If set to false, a progress bar will be displayed instead.  
-- Size defaults to 50 (50x50 maze).  
-- Display details defaults to false.
+Run mazeGenerator.py to begin maze generation.
+
+### Optional arguments
+- Size (-s int_value) - integer length of one side of the maze. Size defaults to 50 (50x50 maze).  
+- Display details (-d true/false) - If true, details of generation prints to console. If false, progress bar displayed in console instead. Display details defaults to false.
